@@ -29,7 +29,7 @@ const Home = () => {
     };
 
     const navigateToGST = () => {
-        console.log("Navigate to GST Calculator");
+        navigation.navigate('GST Calculator');
     };
 
     const navigateToDiscount = () => {

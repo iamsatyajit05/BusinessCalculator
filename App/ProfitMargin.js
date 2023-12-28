@@ -5,42 +5,85 @@ import Dropdown from './component/dropdown';
 import Output from './component/output';
 
 export default function ProfitMargin() {
-  const [revenueAmount, setRevenueAmount] = useState('0');
-  const [revenueOption, setRevenueOption] = useState('banana');
-  const [expenesePercentage, setExpenesePercentage] = useState('0');
-  const [expeneseOption, setExpeneseOption] = useState('banana');
+  const [revenueAmount, setRevenueAmount] = useState('');
+  const [revenueOption, setRevenueOption] = useState('monthly');
+  const [expenesePercentage, setExpenesePercentage] = useState('');
+  const [expeneseOption, setExpeneseOption] = useState('fixed');
 
   const revenueOptionItems = [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' }
+    { label: 'Daily', value: 'daily' },
+    { label: 'Monthly', value: 'monthly' },
+    { label: 'Yearly', value: 'yearly' }
   ]
 
   const expenseOptionItems = [
-    { label: 'Appleaa', value: 'apple' },
-    { label: 'Bananaaa', value: 'banana' }
+    { label: 'Fixed', value: 'fixed' },
+    { label: 'Percentage', value: 'percentage' }
   ]
 
-  const anuualRevenue = 20;
-  const anuualExpense = 25;
-  const anuualProfit = 30;
+  const anuualRevenue = () => {
+    if (revenueOption === 'daily') {
+      return revenueAmount * 365;
+    } else if (revenueOption === 'monthly') {
+      return revenueAmount * 12;
+    } else if (revenueOption === 'yearly') {
+      return revenueAmount;
+    } else {
+      return 0;
+    }
+  }
 
+  const anuualExpense = () => {
+    if (expeneseOption === 'fixed') {
+      if (revenueOption === 'daily') {
+        return expenesePercentage * 365;
+      } else if (revenueOption === 'monthly') {
+        return expenesePercentage * 12;
+      } else if (revenueOption === 'yearly') {
+        return expenesePercentage;
+      } else {
+        return 0;
+      }
+    } else if (expeneseOption === 'percentage') {
+      if (revenueOption === 'daily') {
+        return revenueAmount * (expenesePercentage / 100) * 365;
+      } else if (revenueOption === 'monthly') {
+        return revenueAmount * (expenesePercentage / 100) * 12;
+      } else if (revenueOption === 'yearly') {
+        return revenueAmount * (expenesePercentage / 100);
+      } else {
+        return 0;
+      }
+    } else {
+      return 0;
+    }
+  }
+  
+  const anuualProfit = anuualRevenue() - anuualExpense();
+  const profitMargin = (anuualProfit / anuualRevenue()) * 100 || 0;
+
+  const round2Decimal = (number) => {
+    return Math.round(number * 100) / 100;
+  }
+  
   return (
     <View>
       <View style={styles.inputContainer}>
-        <Text style={styles.containerLabel}>YEARLY REVENUE</Text>
+        <Text style={styles.containerLabel}>{revenueOption.toUpperCase()} REVENUE</Text>
         <Input textLabel={'Amount'} onChange={setRevenueAmount} value={revenueAmount} placeholder={"0"} />
         <Dropdown textLabel={'Option'} onChange={setRevenueOption} value={revenueOption} itemsList={revenueOptionItems} />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.containerLabel}>YEARLY EXPENSES ($)</Text>
-        <Input textLabel={'Percentage'} onChange={setExpenesePercentage} value={expenesePercentage} placeholder={"0"} postfix={''} />
+        <Text style={styles.containerLabel}>{revenueOption.toUpperCase()} EXPENSES</Text>
+        <Input textLabel={expeneseOption === 'fixed' ? 'Amount' : 'Percentage'} onChange={setExpenesePercentage} value={expenesePercentage} placeholder={"0"} postfix={expeneseOption === 'fixed' ? '$' : '%'} />
         <Dropdown textLabel={'Option'} onChange={setExpeneseOption} value={expeneseOption} itemsList={expenseOptionItems} />
       </View>
       <Text style={styles.equalSign}>=</Text>
       <View style={styles.inputContainer}>
-        <Output textLabel={'Annual Revenue'} value={anuualRevenue} prefix={'$'} postfix={''} />
-        <Output textLabel={'Annual Expense'} value={anuualExpense} prefix={'$'} postfix={''} />
+        <Output textLabel={'Annual Revenue'} value={anuualRevenue()} prefix={'$'} postfix={''} />
+        <Output textLabel={'Annual Expense'} value={anuualExpense()} prefix={'$'} postfix={''} />
         <Output textLabel={'Annual Profit'} value={anuualProfit} prefix={'$'} postfix={''} />
+        <Output textLabel={'Profit Margin'} value={profitMargin} prefix={''} postfix={'%'} />
       </View>
     </View>
   );
