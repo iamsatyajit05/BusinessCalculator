@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Input from './component/input';
 import Dropdown from './component/dropdown';
 import Output from './component/output';
@@ -10,20 +10,20 @@ export default function GST() {
   const [gstPercentage, setGstPercentage] = useState('');
 
   const gstOptionItems = [
-    { label: 'Inclusive', value: 'inclusive' },
-    { label: 'Exclusive', value: 'exclusive' }
+    { label: 'Add GST', value: 'inclusive' },
+    { label: 'GST Inclusive', value: 'exclusive' }
   ]
 
   const taxAmount = amount * (gstPercentage / 100) || 0;
-  const finalAmount = parseInt(amount) + parseInt(taxAmount) || 0;
+  const finalAmount = parseFloat(amount) + parseFloat(taxAmount) || 0;
   const originalAmount = parseInt(amount) / (1 + (parseInt(gstPercentage) / 100)) || 0;
   const exclusiveAmount = parseInt(amount) - originalAmount || 0;
   
   return (
     <View>
       <View style={styles.inputContainer}>
-        <Input textLabel={'Amount'} onChange={setAmount} value={amount} placeholder={"0"} />
-        <Input textLabel={'GST'} onChange={setGstPercentage} value={gstPercentage} placeholder={"0"} postfix={'%'} />
+        <Input textLabel={'Amount'} onChange={setAmount} value={amount} placeholder={"Enter Amount"} />
+        <Input textLabel={'GST'} onChange={setGstPercentage} value={gstPercentage} placeholder={"Enter Percentage"} postfix={'%'} />
         <Dropdown textLabel={'Option'} onChange={setGstOption} value={gstOption} itemsList={gstOptionItems} />
       </View>
       <Text style={styles.equalSign}>=</Text>

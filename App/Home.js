@@ -33,11 +33,11 @@ const Home = () => {
     };
 
     const navigateToDiscount = () => {
-        console.log("Navigate to Discount Calculator");
+        navigation.navigate("Discount Calculator");
     };
-
+    
     const navigateToSalesTax = () => {
-        console.log("Navigate to Sales Tax Calculator");
+        navigation.navigate("Sales Tax Calculator");
     };
 
     return (

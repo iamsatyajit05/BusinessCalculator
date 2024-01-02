@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Input from './component/input';
 import Dropdown from './component/dropdown';
 import Output from './component/output';
@@ -70,12 +70,12 @@ export default function ProfitMargin() {
     <View>
       <View style={styles.inputContainer}>
         <Text style={styles.containerLabel}>{revenueOption.toUpperCase()} REVENUE</Text>
-        <Input textLabel={'Amount'} onChange={setRevenueAmount} value={revenueAmount} placeholder={"0"} />
+        <Input textLabel={'Amount'} onChange={setRevenueAmount} value={revenueAmount} placeholder={"Enter Amount"} />
         <Dropdown textLabel={'Option'} onChange={setRevenueOption} value={revenueOption} itemsList={revenueOptionItems} />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.containerLabel}>{revenueOption.toUpperCase()} EXPENSES</Text>
-        <Input textLabel={expeneseOption === 'fixed' ? 'Amount' : 'Percentage'} onChange={setExpenesePercentage} value={expenesePercentage} placeholder={"0"} postfix={expeneseOption === 'fixed' ? '$' : '%'} />
+        <Input textLabel={expeneseOption === 'fixed' ? 'Amount' : 'Percentage'} onChange={setExpenesePercentage} value={expenesePercentage} placeholder={expeneseOption === 'fixed' ? 'Amount' : 'Percentage'} postfix={expeneseOption === 'fixed' ? '$' : '%'} />
         <Dropdown textLabel={'Option'} onChange={setExpeneseOption} value={expeneseOption} itemsList={expenseOptionItems} />
       </View>
       <Text style={styles.equalSign}>=</Text>

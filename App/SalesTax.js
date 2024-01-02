@@ -4,18 +4,18 @@ import Input from './component/input';
 import Dropdown from './component/dropdown';
 import Output from './component/output';
 
-export default function VAT() {
+export default function SalesTax() {
   const [amount, setAmount] = useState('');
   const [vatOption, setVatOption] = useState('inclusive');
   const [vatPercentage, setVatPercentage] = useState('');
 
   const vatOptionItems = [
-    { label: 'Add VAT', value: 'inclusive' },
-    { label: 'VAT Inclusive', value: 'exclusive' }
+    { label: 'Add Sales Tax', value: 'inclusive' },
+    { label: 'Sales Tax Inclusive', value: 'exclusive' }
   ]
 
   const taxAmount = amount * (vatPercentage / 100) || 0;
-  const finalAmount = (parseFloat(amount) + parseFloat(taxAmount)) || 0;
+  const finalAmount = parseFloat(amount) + parseFloat(taxAmount) || 0;
   const originalAmount = parseInt(amount) / (1 + (parseInt(vatPercentage) / 100)) || 0;
   const exclusiveAmount = parseInt(amount) - originalAmount || 0;
   
@@ -23,13 +23,13 @@ export default function VAT() {
     <View>
       <View style={styles.inputContainer}>
         <Input textLabel={'Amount'} onChange={setAmount} value={amount} placeholder={"Enter Amount"} />
-        <Input textLabel={'VAT'} onChange={setVatPercentage} value={vatPercentage} placeholder={"Enter Percentage"} postfix={'%'} />
+        <Input textLabel={'Sales Tax'} onChange={setVatPercentage} value={vatPercentage} placeholder={"Enter Percentage"} postfix={'%'} />
         <Dropdown textLabel={'Option'} onChange={setVatOption} value={vatOption} itemsList={vatOptionItems} />
       </View>
       <Text style={styles.equalSign}>=</Text>
       <View style={styles.inputContainer}>
-        <Output textLabel={vatOption === 'inclusive' ? 'Amount (incl VAT)' : 'Amount (excl VAT)'} value={vatOption === 'inclusive' ? finalAmount : originalAmount} prefix={'$'} postfix={''} />
-        <Output textLabel={'VAT Amount'} value={vatOption === 'inclusive' ? taxAmount : exclusiveAmount} prefix={'$'} postfix={''} />
+        <Output textLabel={vatOption === 'inclusive' ? 'Amount (incl Sales Tax)' : 'Amount (excl Sales VAT)'} value={vatOption === 'inclusive' ? finalAmount : originalAmount} prefix={'$'} postfix={''} />
+        <Output textLabel={'Sales Tax Amount'} value={vatOption === 'inclusive' ? taxAmount : exclusiveAmount} prefix={'$'} postfix={''} />
       </View>
     </View>
   );
