@@ -12,6 +12,7 @@ import VAT from './App/VAT';
 import GST from './App/GST';
 import Discount from './App/Discount';
 import SalesTax from './App/SalesTax';
+import SalesMargin from './App/SalesMargin';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ function App() {
         <Stack.Screen name="GST Calculator" component={GST} />
         <Stack.Screen name="Discount Calculator" component={Discount} />
         <Stack.Screen name="Sales Tax Calculator" component={SalesTax} />
+        <Stack.Screen name="Sales Margin Calculator" component={SalesMargin} />
       </Stack.Navigator>
       <StatusBar style="light" backgroundColor="#142f44" />
     </NavigationContainer>

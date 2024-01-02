@@ -5,16 +5,16 @@ import Output from './component/output';
 
 export default function Discount() {
   const [amount, setAmount] = useState('');
-  const [gstPercentage, setGstPercentage] = useState('');
+  const [discountPercentage, setDiscountPercentage] = useState('');
 
-  const discount = (parseInt(amount) * (parseInt(gstPercentage) / 100)) || 0;
+  const discount = (parseInt(amount) * (parseInt(discountPercentage) / 100)) || 0;
   const finalAmount = parseInt(amount) - parseInt(discount) || 0;
   
   return (
     <View>
       <View style={styles.inputContainer}>
         <Input textLabel={'Amount'} onChange={setAmount} value={amount} placeholder={"Enter Amount"} />
-        <Input textLabel={'Discount'} onChange={setGstPercentage} value={gstPercentage} placeholder={"Enter Percentage"} postfix={'%'} />
+        <Input textLabel={'Discount'} onChange={setDiscountPercentage} value={discountPercentage} placeholder={"Enter Percentage"} postfix={'%'} />
       </View>
       <Text style={styles.equalSign}>=</Text>
       <View style={styles.inputContainer}>

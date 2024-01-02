@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import Input from './component/input';
 import Dropdown from './component/dropdown';
 import Output from './component/output';

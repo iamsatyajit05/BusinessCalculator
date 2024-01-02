@@ -25,7 +25,7 @@ const Home = () => {
     };
 
     const navigateToSalesMargin = () => {
-        console.log("Navigate to Sales Margin Calculator");
+        navigation.navigate('Sales Margin Calculator');
     };
 
     const navigateToGST = () => {
