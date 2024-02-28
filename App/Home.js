@@ -91,7 +91,7 @@ const Home = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: '#a2bbcf'
+        backgroundColor: 'lightgray'
     },
     row: {
         flexDirection: 'row',
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         padding: 20,
         marginHorizontal: 5,
         borderRadius: 20,
-        backgroundColor: '#205b79',
+        backgroundColor: 'white',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#FFF'
+        color: 'black'
     },
 });
 
